@@ -41,19 +41,15 @@ public class PessoaGestaoService {
         if (pessoa.getEmail() == null || pessoa.getCodigoRecuperacaoSenha() == null) {
             return "Dados insuficientes para alterar a senha.";
         }
-
-        // Busca pelo usuário e código de recuperação no banco de dados
         Pessoa pessoa1 = pessoaRepository.findByEmailAndCodigoRecuperacaoSenha(
                 pessoa.getEmail(), pessoa.getCodigoRecuperacaoSenha());
 
         if (pessoa1 != null) {
             if (pessoa1.getDataEnvioCodigo() != null) {
                 long diferencaMillis = new Date().getTime() - pessoa1.getDataEnvioCodigo().getTime();
-
-                // Validação de expiração (600000 ms = 10 minutos)
                 if (diferencaMillis < 600000) {
-                    pessoa1.setSenha(pessoa.getSenha());  // Atualiza a senha
-                    pessoa1.setCodigoRecuperacaoSenha(null);  // Limpa o código de recuperação
+                    pessoa1.setSenha(pessoa.getSenha());
+                    pessoa1.setCodigoRecuperacaoSenha(null);
                     pessoaRepository.saveAndFlush(pessoa1);
                     return "Senha alterada com sucesso.";
                 } else {
