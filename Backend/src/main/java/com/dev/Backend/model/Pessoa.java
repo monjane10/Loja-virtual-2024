@@ -20,6 +20,9 @@ public class Pessoa {
     private String nome;
     private String bi;
     private String email;
+    private String codigoRecuperacaoSenha;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataEnvioCodigo;
     private String Senha;
     private String endereco;
     private String nuit;
