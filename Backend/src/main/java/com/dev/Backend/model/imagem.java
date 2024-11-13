@@ -19,6 +19,6 @@ public class imagem {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataActualizacao;
     @ManyToOne
-    @JoinColumn(name = "productoId")
+    @JoinColumn(name = "producto_id", nullable = false)
     private  Producto producto;
 }

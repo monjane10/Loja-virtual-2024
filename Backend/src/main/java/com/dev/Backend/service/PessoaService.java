@@ -25,6 +25,7 @@ public class PessoaService {
         validarPessoa(pessoa);
         pessoa.setDataCriacao(new Date());
         pessoa.setDataActualizacao(new Date());
+        pessoa.setPermissaPessoas(pessoa.getPermissaPessoas());
         return pessoaRepository.saveAndFlush(pessoa);
     }
 
